@@ -1,5 +1,12 @@
 package ccgen
 
+type Errors []Error
+
+type Error struct {
+	Parameter string `json:"parameter"`
+	Issue     string `json:"error"`
+}
+
 type Card struct {
 	Issuer     string     `json:"issuer"`
 	Pan        PAN        `json:"pan"`

@@ -7,13 +7,6 @@ import (
 	"time"
 )
 
-type Errors []Error
-
-type Error struct {
-	Parameter string `json:"parameter"`
-	Issue     string `json:"error"`
-}
-
 func calculateLuhn(digits string) string {
 	number, _ := strconv.Atoi(digits)
 	checkNumber := checksum(number)

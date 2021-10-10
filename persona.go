@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	cc "github.com/fizzywhizbang/persona/ccgen"
 )
 
 func main() {
@@ -13,11 +15,13 @@ func main() {
 	// }
 	//get length of args
 
-	ssn := genSSN()
-	for !checkValid(ssn) {
-		ssn = genSSN()
-	}
-	fmt.Println(ssn)
-
-	GenerateCards("visa", 1)
+	// ssn := genSSN()
+	// for !checkValid(ssn) {
+	// 	ssn = genSSN()
+	// }
+	// fmt.Println(ssn)
+	creditCard := cc.GenerateCards("visa", 1)
+	card := creditCard[0]
+	fmt.Println(card.Issuer)
+	// GenerateCards("visa", 1)
 }
