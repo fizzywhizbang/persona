@@ -14,14 +14,14 @@ func main() {
 
 	// }
 	//get length of args
+	ssn := ss.ssngen()
 
-	// ssn := genSSN()
-	// for !checkValid(ssn) {
-	// 	ssn = genSSN()
+	// for !ss.checkValid(ssn) {
+	//  	ssn = ss.genSSN()
 	// }
-	// fmt.Println(ssn)
+	fmt.Println(ssn)
 	creditCard := cc.GenerateCards("visa", 1)
 	card := creditCard[0]
-	fmt.Println(card.Issuer)
+	fmt.Println(card.Pan.Formatted)
 	// GenerateCards("visa", 1)
 }

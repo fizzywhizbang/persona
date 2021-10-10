@@ -45,5 +45,4 @@ func GenerateCards(cardType string, count int) []Card {
 		cardList = append(cardList, card)
 	}
 	return cardList
-	// c.JSON(http.StatusOK, cardList)
 }

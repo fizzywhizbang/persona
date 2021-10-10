@@ -1,4 +1,4 @@
-package main
+package ssngen
 
 import (
 	"math/rand"
@@ -40,7 +40,7 @@ func checkValid(ssn string) bool {
 	return true
 }
 
-func genSSN() string {
+func ssngen() string {
 	//we need to generate three numbers and validate
 	var builder strings.Builder
 
