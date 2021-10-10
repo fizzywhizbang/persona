@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	cc "github.com/fizzywhizbang/persona/ccgen"
+	p "github.com/fizzywhizbang/persona/persongen"
 	ss "github.com/fizzywhizbang/persona/ssngen"
 )
 
@@ -16,15 +17,19 @@ func main() {
 	// }
 	//get length of args
 
-	creditCard := cc.GenerateCards("visa", 1)
-	card := creditCard[0]
-	fmt.Println(card.Pan.Formatted)
-	// GenerateCards("visa", 1)
-	ssn := ss.SSNgen()
-	fmt.Println(ssn)
+	creditCard := cc.GenerateCards("visa", 2)
 
-	for !ss.CheckValid(ssn) {
-		ssn = ss.SSNgen()
+	//loop through cards and supply ssn and persona
+	for i := 0; i < len(creditCard); i++ {
+		card := creditCard[i]
+		person := p.PersonGen()
+		fmt.Println(card)
+		fmt.Println(person)
+		ssn := ss.SSNgen()
+		for !ss.CheckValid(ssn) {
+			ssn = ss.SSNgen()
+		}
+		fmt.Println(ssn)
 	}
-	fmt.Println(ssn)
+
 }
