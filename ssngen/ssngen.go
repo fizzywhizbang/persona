@@ -13,7 +13,7 @@ import (
 729–730	Enumeration at entry
 */
 
-func checkValid(ssn string) bool {
+func CheckValid(ssn string) bool {
 
 	firstThree := ssn[0:3]
 	//convert first three to int
@@ -40,7 +40,7 @@ func checkValid(ssn string) bool {
 	return true
 }
 
-func ssngen() string {
+func SSNgen() string {
 	//we need to generate three numbers and validate
 	var builder strings.Builder
 
