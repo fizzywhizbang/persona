@@ -35,7 +35,7 @@ func main() {
 		payload := card.Issuer + "\n"
 		payload += card.Pan.Formatted + "\n"
 		payload += "exp:" + strconv.Itoa(card.ExpiryDate.Month) + strconv.Itoa(card.ExpiryDate.Year) + " CVV:" + card.CVV + "\n"
-		payload += person.First + person.Last + "(" + person.Sex + ")\n"
+		payload += person.First + " " + person.Last + "(" + person.Sex + ")\n"
 		ssn := ss.SSNgen()
 		for !ss.CheckValid(ssn) {
 			ssn = ss.SSNgen()
