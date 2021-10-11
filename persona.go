@@ -25,7 +25,7 @@ func main() {
 
 	} else {
 		if os.Args[1] == "gui" {
-			fmt.Println("start qui")
+			fmt.Println("start gui")
 		} else {
 			c := strings.Split(os.Args[1], "=")
 			cardType := c[1]
