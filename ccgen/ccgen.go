@@ -11,7 +11,7 @@ const MaxCount = 500
 func GenerateCards(cardType string, count int) []Card {
 
 	// count, countError := strconv.Atoi(countString)
-	cardProperties, exists := bin[cardType]
+	cardProperties, exists := Bin[cardType]
 
 	var errors Errors
 

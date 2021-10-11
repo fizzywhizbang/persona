@@ -30,7 +30,7 @@ type CardProperties struct {
 	CvvSize  int
 }
 
-var bin = map[string]CardProperties{
+var Bin = map[string]CardProperties{
 	//https://en.wikipedia.org/wiki/Payment_card_number
 	"amex": {
 		LongName: "American Express",

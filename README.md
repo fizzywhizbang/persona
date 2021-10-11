@@ -1,4 +1,7 @@
 # Persona
-I developed this for robo calls to ensure I have a persona to include Name, SSN, and Credit Card number available to give to the scammers
+With the barrage of spam/scam calls and emails I decided I needed a fast way to produce Credit Card, SSN, and a name with which to play with these people.
 
 Written in GO and will have a GUI to go with it soon
+Future updates...
+-save persona for reference
+-gui

@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strconv"
+	"strings"
 
 	cc "github.com/fizzywhizbang/persona/ccgen"
 	p "github.com/fizzywhizbang/persona/persongen"
@@ -9,27 +12,42 @@ import (
 )
 
 func main() {
-	// var available ListOfKnownTypes
 
-	// for key, value := range AvailableCardTypes {
-	// 	fmt.Println(key, " ", value.LongName)
+	if os.Args[1] == "help" {
+		message := "Welcome to help\n"
+		message += "Command line usage is\n"
+		message += "go run . type=visa qty=1"
+		message += "Card Types:"
+		fmt.Println(message)
+		fmt.Println(cc.Bin)
+		fmt.Println("_________________________________________________")
 
-	// }
-	//get length of args
+	} else {
+		if os.Args[1] == "gui" {
+			fmt.Println("start qui")
+		} else {
+			c := strings.Split(os.Args[1], "=")
+			cardType := c[1]
 
-	creditCard := cc.GenerateCards("visa", 2)
+			q := strings.Split(os.Args[2], "=")
+			qty, _ := strconv.Atoi(q[1])
 
-	//loop through cards and supply ssn and persona
-	for i := 0; i < len(creditCard); i++ {
-		card := creditCard[i]
-		person := p.PersonGen()
-		fmt.Println(card)
-		fmt.Println(person)
-		ssn := ss.SSNgen()
-		for !ss.CheckValid(ssn) {
-			ssn = ss.SSNgen()
+			creditCard := cc.GenerateCards(cardType, qty)
+
+			//loop through cards and supply ssn and persona
+			for i := 0; i < len(creditCard); i++ {
+				card := creditCard[i]
+				person := p.PersonGen()
+				fmt.Println(card)
+				fmt.Println(person)
+				ssn := ss.SSNgen()
+				for !ss.CheckValid(ssn) {
+					ssn = ss.SSNgen()
+				}
+				fmt.Println(ssn)
+			}
 		}
-		fmt.Println(ssn)
+
 	}
 
 }
