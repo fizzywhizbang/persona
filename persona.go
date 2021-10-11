@@ -16,8 +16,8 @@ func main() {
 	if os.Args[1] == "help" {
 		message := "Welcome to help\n"
 		message += "Command line usage is\n"
-		message += "go run . type=visa qty=1"
-		message += "Card Types:"
+		message += "go run . type=visa qty=1\n"
+		message += "Card Types:amex, dci, dcu, discover, jcb, mae, maeui, mc, visa\n"
 		fmt.Println(message)
 		fmt.Println(cc.Bin)
 		fmt.Println("_________________________________________________")
