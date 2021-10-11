@@ -1,10 +1,8 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
 
 	cc "github.com/fizzywhizbang/persona/ccgen"
 	p "github.com/fizzywhizbang/persona/persongen"
@@ -13,42 +11,31 @@ import (
 
 func main() {
 
-	if os.Args[1] == "help" {
-		message := "Welcome to help\n"
-		message += "Version 0.1\n"
-		message += "Command line usage is\n"
-		message += "go run . type=visa qty=1\n"
-		message += "Card Types:amex, dci, dcu, discover, jcb, mae, maeui, mc, visa\n"
-		fmt.Println(message)
-		fmt.Println(cc.Bin)
-		fmt.Println("_________________________________________________")
+	typeFlag := flag.String("t", "visa", "amex, dci, dcu, discover, jcb, mae, maeui, mc, visa")
+	qtyFlag := flag.Int("q", 1, "An integer for quantity")
 
-	} else {
-		if os.Args[1] == "gui" {
-			fmt.Println("start gui")
-		} else {
-			c := strings.Split(os.Args[1], "=")
-			cardType := c[1]
+	flag.Parse()
+	fmt.Println("")
+	fmt.Println("######################################")
+	fmt.Println("type:", *typeFlag)
+	fmt.Println("qty:", *qtyFlag)
 
-			q := strings.Split(os.Args[2], "=")
-			qty, _ := strconv.Atoi(q[1])
+	fmt.Println("######################################")
+	fmt.Println("")
 
-			creditCard := cc.GenerateCards(cardType, qty)
+	creditCard := cc.GenerateCards(*typeFlag, *qtyFlag)
 
-			//loop through cards and supply ssn and persona
-			for i := 0; i < len(creditCard); i++ {
-				card := creditCard[i]
-				person := p.PersonGen()
-				fmt.Println(card)
-				fmt.Println(person)
-				ssn := ss.SSNgen()
-				for !ss.CheckValid(ssn) {
-					ssn = ss.SSNgen()
-				}
-				fmt.Println(ssn)
-			}
+	//loop through cards and supply ssn and persona
+	for i := 0; i < len(creditCard); i++ {
+		card := creditCard[i]
+		person := p.PersonGen()
+		fmt.Println(card)
+		fmt.Println(person)
+		ssn := ss.SSNgen()
+		for !ss.CheckValid(ssn) {
+			ssn = ss.SSNgen()
 		}
-
+		fmt.Println(ssn)
 	}
 
 }
