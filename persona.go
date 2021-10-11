@@ -15,6 +15,7 @@ func main() {
 
 	if os.Args[1] == "help" {
 		message := "Welcome to help\n"
+		message += "Version 0.1\n"
 		message += "Command line usage is\n"
 		message += "go run . type=visa qty=1\n"
 		message += "Card Types:amex, dci, dcu, discover, jcb, mae, maeui, mc, visa\n"
