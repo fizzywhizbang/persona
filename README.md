@@ -1,7 +1,7 @@
 # Persona
 With the barrage of spam/scam calls and emails I decided I needed a fast way to produce Credit Card, SSN, and a name with which to play with these people.
 
-# To Run
+## To Run
 First you need golang installed<br>
 You can run with "go run ." or you can build for your environment<br>
 to run help:<br>
