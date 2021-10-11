@@ -3,6 +3,7 @@ package persongen
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"math/rand"
 	"strings"
 
@@ -12,6 +13,7 @@ import (
 func PersonGen() Person {
 	db, err := sql.Open("sqlite3", "database/persona.db") // Open the created SQLite File
 	if err != nil {
+		log.Println(err.Error())
 		fmt.Println("coldn't open database")
 	}
 	max := 151671
@@ -22,6 +24,7 @@ func PersonGen() Person {
 	err = db.QueryRow(q, r).Scan(&lastname.id, &lastname.name)
 
 	if err != nil {
+		log.Println(err.Error())
 		fmt.Println("Something went wrong getting lastname")
 	}
 	var P Person
@@ -35,6 +38,7 @@ func PersonGen() Person {
 	err = db.QueryRow(q, r).Scan(&firstname.id, &firstname.name, &firstname.sex)
 
 	if err != nil {
+		log.Println(err.Error())
 		fmt.Println("Something went wrong getting firstname")
 	}
 	P.Fid = firstname.id
