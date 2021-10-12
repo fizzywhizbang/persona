@@ -1,25 +1,15 @@
 # Persona
 With the barrage of spam/scam calls and emails I decided I needed a fast way to produce Credit Card, SSN, and a name with which to play with these people.
 
-## To Run
+## To Compile
 First you need golang installed<br>
-You can run with "go run ." or you can build for your environment<br>
-to run help:<br>
-./persona or ./persona -h<br>
-Welcome to help<br>
-Command line usage is<br>
-"go run . -t visa -q 1"<br>
-Card Types:<br>
-amex, dci, dcu, discover, jcb, mae, maeui, mc, visa (default "visa")<br>
+Next you'll need QT5 installed (I'll get to QT6 soon)
+Next you'll need https://github.com/therecipe/qt (there are good instructions there)
 
-To generate a persona:<br>
-either "go run . -t visa -q 1"<br>
-or<br>
-"./persona -t visa -q 1"<br>
+Once compiled the GUI should be pretty simple to use
+You can generate 1 card or multiple and you can create cards for multiple personas or multiple cards for one
 
-To save to a file just add "-w" and it will output to a file
 
-Written in GO and will have a GUI to go with it soon.<br>
 
 Future updates...<br>
 -save persona for reference<br>
