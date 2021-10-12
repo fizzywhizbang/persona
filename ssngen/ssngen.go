@@ -40,16 +40,20 @@ func CheckValid(ssn string) bool {
 	return true
 }
 
-func SSNgen() string {
+func SSNgen(qty int) []string {
 	//we need to generate three numbers and validate
 	var builder strings.Builder
-
-	for i := 1; i <= 9; i++ {
-		if i == 4 || i == 6 {
-			builder.WriteString("-")
+	SSNs := []string{}
+	for q := 0; q < qty; q++ {
+		for i := 1; i <= 9; i++ {
+			if i == 4 || i == 6 {
+				builder.WriteString("-")
+			}
+			d := rand.Intn(9)
+			builder.WriteString(strconv.Itoa(d))
 		}
-		d := rand.Intn(9)
-		builder.WriteString(strconv.Itoa(d))
+		SSNs = append(SSNs, builder.String())
 	}
-	return builder.String()
+
+	return SSNs
 }
