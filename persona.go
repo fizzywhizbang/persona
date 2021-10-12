@@ -5,6 +5,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"strings"
 
 	cc "github.com/fizzywhizbang/persona/ccgen"
 	p "github.com/fizzywhizbang/persona/persongen"
@@ -18,9 +19,30 @@ var qty = 1
 var opt string
 
 func main() {
-
+	path, _ := os.Getwd()
+	fmt.Println(path)
 	gui()
 }
+
+// func gennames() {
+// 	person := p.PersonGen(100)
+// 	f, err := os.Create("first.txt")
+// 	if err != nil {
+// 		fmt.Println("Could not write file")
+// 	}
+
+// 	defer f.Close()
+// 	payload := ""
+// 	for i := 0; i < len(person); i++ {
+// 		payload += "\"" + person[i].First + "\","
+// 	}
+// 	_, err2 := f.WriteString(payload)
+
+// 	if err2 != nil {
+// 		fmt.Println("Could not write to file")
+// 	}
+
+// }
 
 //will return in next itteration
 // func writeToFileFunc(filename string, payload string) {
@@ -43,7 +65,7 @@ func gui() {
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 
 	window := widgets.NewQMainWindow(nil, 0)
-	window.SetMinimumSize2(600, 400)
+	window.SetMinimumSize2(620, 400)
 	window.SetWindowTitle("Persona")
 
 	centralWidget := widgets.NewQWidget(nil, 0)
@@ -64,7 +86,7 @@ func gui() {
 
 func creditCard(app *widgets.QApplication, window *widgets.QMainWindow) {
 	mainWidget := widgets.NewQWidget(nil, 0)
-	mainWidget.SetMinimumWidth(590)
+	mainWidget.SetMinimumWidth(610)
 	vLayout := widgets.NewQVBoxLayout()
 	vLayout.SetContentsMargins(4, 0, 4, 0)
 	mainWidget.SetLayout(vLayout)
@@ -128,7 +150,7 @@ func creditCard(app *widgets.QApplication, window *widgets.QMainWindow) {
 
 		name := widgets.NewQLineEdit(nil)
 
-		name.SetText(person[x].First + " " + person[x].Last + " (" + person[x].Sex + ")")
+		name.SetText(person[x].First + " " + strings.Title(strings.ToLower(person[x].Last)))
 
 		formLayout.InsertRow5(2, name)
 
@@ -199,9 +221,14 @@ func toolbarInit(app *widgets.QApplication, window *widgets.QMainWindow, toolbar
 	qtyLabel := widgets.NewQLabel(nil, 0)
 	qtyLabel.SetText("Qty")
 	toolbar.AddWidget(qtyLabel)
-	qtyBox := widgets.NewQLineEdit(nil)
-	qtyBox.SetText(strconv.Itoa(qty))
-	toolbar.AddWidget(qtyBox)
+	qtySelector := widgets.NewQComboBox(nil)
+	qtySelector.AddItems([]string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"})
+	toolbar.AddWidget(qtySelector)
+	if qty == 1 {
+		qtySelector.SetCurrentIndex(0)
+	} else {
+		qtySelector.SetCurrentText(strconv.Itoa(qty))
+	}
 
 	option := widgets.NewQComboBox(nil)
 	options := []string{"One Person Multiple Cards", "Persons Multiple Cards"}
@@ -218,7 +245,7 @@ func toolbarInit(app *widgets.QApplication, window *widgets.QMainWindow, toolbar
 	goButton.ConnectClicked(func(checked bool) {
 		ctype = selector.CurrentText()
 		opt = option.CurrentText()
-		q, err := strconv.Atoi(qtyBox.Text())
+		q, err := strconv.Atoi(qtySelector.CurrentText())
 		if err != nil { // if for some reason a number isn't entered default to one
 			qty = 1
 		} else {
