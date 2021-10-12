@@ -5,6 +5,7 @@ With the barrage of spam/scam calls and emails I decided I needed a fast way to 
 First you need golang installed<br>
 Next you'll need QT5 installed (I'll get to QT6 soon)
 Next you'll need https://github.com/therecipe/qt (there are good instructions there)
+qtdeploy build to compile for your platform
 
 Once compiled the GUI should be pretty simple to use
 You can generate 1 card or multiple and you can create cards for multiple personas or multiple cards for one
@@ -13,7 +14,6 @@ You can generate 1 card or multiple and you can create cards for multiple person
 
 Future updates...<br>
 -save persona for reference<br>
--gui
 
 ## Contributing
 
