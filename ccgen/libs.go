@@ -34,6 +34,7 @@ func checksum(number int) int {
 	return sum % 10
 }
 
+//generate PAN
 func GeneratePAN(properties CardProperties) PAN {
 	var prefix = properties.Prefix[rand.Intn(len(properties.Prefix))]
 	for len(prefix) < properties.PanSize-1 {
@@ -47,6 +48,7 @@ func GeneratePAN(properties CardProperties) PAN {
 	}
 }
 
+//format PAN
 func FormatPan(cardType string, pan string) string {
 	var formattedPan string
 	for i := 0; i < len(pan); i++ {
@@ -75,10 +77,12 @@ func generateRandomNumberOfSize(size int) string {
 	return strings.Join(randomNumber, "")
 }
 
+//generate CVV
 func GenerateCVV(size int) string {
 	return generateRandomNumberOfSize(size)
 }
 
+//generate expiration date
 func GenerateExpiryDate() ExpiryDate {
 	var year = time.Now().Year() + rand.Intn(6)
 	var month = rand.Intn(12) + 1

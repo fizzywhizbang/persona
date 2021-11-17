@@ -175,11 +175,11 @@ func creditCard(app *widgets.QApplication, window *widgets.QMainWindow) {
 	// person data
 
 	vLayout.AddLayout(formLayout, 0)
-	scroll_layout := widgets.NewQVBoxLayout2(nil)
-	scroll_layout.AddWidget(scrollArea, 0, 0)
-	scroll_layout.SetContentsMargins(0, 0, 0, 0)
+	scrollLayout := widgets.NewQVBoxLayout2(nil)
+	scrollLayout.AddWidget(scrollArea, 0, 0)
+	scrollLayout.SetContentsMargins(0, 0, 0, 0)
 	containerWidget := widgets.NewQWidget(nil, 0)
-	containerWidget.SetLayout(scroll_layout)
+	containerWidget.SetLayout(scrollLayout)
 	window.SetCentralWidget(containerWidget)
 	window.Show()
 }

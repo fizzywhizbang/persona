@@ -12,7 +12,7 @@ import (
 700–728	Railroad Retirement Board (discontinued July 1, 1963)
 729–730	Enumeration at entry
 */
-
+//eport validation check
 func CheckValid(ssn string) bool {
 
 	firstThree := ssn[0:3]
@@ -40,6 +40,7 @@ func CheckValid(ssn string) bool {
 	return true
 }
 
+//export SSN generator
 func SSNgen(qty int) []string {
 	//we need to generate three numbers and validate
 	var builder strings.Builder

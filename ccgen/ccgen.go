@@ -6,8 +6,10 @@ import (
 	"time"
 )
 
+//to ensure we don't create more than 500 cards
 const MaxCount = 500
 
+//generate credit card numbers
 func GenerateCards(cardType string, count int) []Card {
 
 	// count, countError := strconv.Atoi(countString)

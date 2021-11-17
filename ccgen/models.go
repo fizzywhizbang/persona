@@ -1,12 +1,15 @@
 package ccgen
 
+//export for persona
 type Errors []Error
 
+//struct export for persona
 type Error struct {
 	Parameter string `json:"parameter"`
 	Issue     string `json:"error"`
 }
 
+//struct export for persona
 type Card struct {
 	Issuer     string     `json:"issuer"`
 	Pan        PAN        `json:"pan"`
@@ -14,15 +17,19 @@ type Card struct {
 	CVV        string     `json:"cvv"`
 }
 
+//struct export for persona
 type ExpiryDate struct {
 	Month int `json:"month"`
 	Year  int `json:"year"`
 }
 
+//struct export for persona
 type PAN struct {
 	Raw       string `json:"raw"`
 	Formatted string `json:"formatted"`
 }
+
+//struct export for persona
 type CardProperties struct {
 	LongName string
 	Prefix   []string
