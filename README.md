@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/report/github.com/fizzywhizbang/persona)](https://goreportcard.com/report/github.com/fizzywhizbang/persona)
+
 # Persona
 With the barrage of spam/scam calls and emails I decided I needed a fast way to produce Credit Card, SSN, and a name with which to play with these people.
 
