@@ -5,9 +5,9 @@ With the barrage of spam/scam calls and emails I decided I needed a fast way to 
 
 ## To Compile
 First you need golang installed<br>
-Next you'll need QT6.9 installed
-Next you'll need https://github.com/mappu/miqt/qt6 
-go build -ldflags '-s -w'
+Next you'll need QT6.9 installed  
+Next you'll need https://github.com/mappu/miqt/qt6   
+go build -ldflags '-s -w'  
 
 Once compiled the GUI should be pretty simple to use
 You can generate 1 card or multiple and you can create cards for multiple personas or multiple cards for one
