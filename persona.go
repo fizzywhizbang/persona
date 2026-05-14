@@ -10,8 +10,7 @@ import (
 	cc "github.com/fizzywhizbang/persona/ccgen"
 	p "github.com/fizzywhizbang/persona/persongen"
 	ss "github.com/fizzywhizbang/persona/ssngen"
-	"github.com/therecipe/qt/core"
-	"github.com/therecipe/qt/widgets"
+	qt "github.com/mappu/miqt/qt6"
 )
 
 var ctype string
@@ -62,79 +61,79 @@ func main() {
 // }
 
 func gui() {
-	app := widgets.NewQApplication(len(os.Args), os.Args)
+	app := qt.NewQApplication(os.Args)
 
-	window := widgets.NewQMainWindow(nil, 0)
+	window := qt.NewQMainWindow(nil)
 	window.SetMinimumSize2(620, 400)
 	window.SetWindowTitle("Persona")
 
-	centralWidget := widgets.NewQWidget(nil, 0)
+	centralWidget := qt.NewQWidget(nil)
 	window.SetCentralWidget(centralWidget)
 
-	verticalLayout := widgets.NewQVBoxLayout()
+	verticalLayout := qt.NewQVBoxLayout(nil)
 
-	toolbar := toolbarInit(app, window, widgets.NewQToolBar2(nil))
+	toolbar := toolbarInit(app, window, qt.NewQToolBar3())
 
-	verticalLayout.SetMenuBar(toolbar)
-	centralWidget.SetLayout(verticalLayout)
+	verticalLayout.SetMenuBar(toolbar.QWidget)
+	centralWidget.SetLayout(verticalLayout.QLayout)
 
 	// make the window visible
 	window.Show()
 
-	app.Exec()
+	qt.QApplication_Exec()
 }
 
-func creditCard(app *widgets.QApplication, window *widgets.QMainWindow) {
-	mainWidget := widgets.NewQWidget(nil, 0)
+func creditCard(app *qt.QApplication, window *qt.QMainWindow) {
+	mainWidget := qt.NewQWidget(nil)
 	mainWidget.SetMinimumWidth(610)
-	vLayout := widgets.NewQVBoxLayout()
+	vLayout := qt.NewQVBoxLayout(nil)
 	vLayout.SetContentsMargins(4, 0, 4, 0)
-	mainWidget.SetLayout(vLayout)
+	mainWidget.SetLayout(vLayout.QLayout)
 
-	scrollArea := widgets.NewQScrollArea(window)
+	scrollArea := qt.NewQScrollArea(window.QWidget)
 
-	scrollArea.SetHorizontalScrollBarPolicy(core.Qt__ScrollBarAlwaysOff)
-	scrollArea.SetVerticalScrollBarPolicy(core.Qt__ScrollBarAlwaysOn)
+	scrollArea.SetHorizontalScrollBarPolicy(qt.ScrollBarAlwaysOff)
+	scrollArea.SetVerticalScrollBarPolicy(qt.ScrollBarAlwaysOn)
 	scrollArea.SetWidgetResizable(true)
 	scrollArea.SetWidget(mainWidget)
 
-	formLayout := widgets.NewQFormLayout(nil)
+	formLayout := qt.NewQFormLayout(nil)
 
-	toolbar := toolbarInit(app, window, widgets.NewQToolBar2(nil))
-	vLayout.SetMenuBar(toolbar)
+	toolbar := toolbarInit(app, window, qt.NewQToolBar3())
+	vLayout.SetMenuBar(toolbar.QWidget)
 	person := p.PersonGen(qty)
 	ssn := ss.SSNgen(qty)
 	card := cc.GenerateCards(matchType(ctype), qty)
 	for i := 0; i < qty; i++ {
 		//card data
-		pan := widgets.NewQLineEdit(nil)
+		pan := qt.NewQLineEdit(nil)
 		pan.SetText(card[i].Pan.Formatted)
-		group0 := widgets.NewQHBoxLayout()
-		cardLabel := widgets.NewQLabel(nil, 0)
+		group0 := qt.NewQHBoxLayout(nil)
+		cardLabel := qt.NewQLabel(nil)
 		cardLabel.SetText("Card#")
-		group0.AddWidget(cardLabel, 0, 0)
-		group0.AddWidget(pan, 0, 0)
-		formLayout.InsertRow6(0, group0)
+		group0.AddWidget(cardLabel.QWidget)
+		group0.AddWidget(pan.QWidget)
+		formLayout.InsertRow6(0, group0.QLayout)
 
-		group1 := widgets.NewQHBoxLayout()
+		group1 := qt.NewQHBoxLayout(nil)
 
-		explabel := widgets.NewQLabel(nil, 0)
+		explabel := qt.NewQLabel(nil)
 		explabel.SetText("exp")
-		group1.AddWidget(explabel, 0, 0)
-		expiry := widgets.NewQLineEdit(nil)
+		group1.AddWidget(explabel.QWidget)
+		expiry := qt.NewQLineEdit(nil)
 		dateString := strconv.Itoa(card[i].ExpiryDate.Month) + "/" + strconv.Itoa(card[i].ExpiryDate.Year)
 		expiry.SetText(dateString)
-		group1.AddWidget(expiry, 0, 0)
+		group1.AddWidget(expiry.QWidget)
 
-		cvvlabel := widgets.NewQLabel(nil, 0)
+		cvvlabel := qt.NewQLabel(nil)
 		cvvlabel.SetText("CVV")
-		group1.AddWidget(cvvlabel, 0, 0)
-		cvv := widgets.NewQLineEdit(nil)
+		group1.AddWidget(cvvlabel.QWidget)
+		cvv := qt.NewQLineEdit(nil)
 		cvv.SetText(card[i].CVV)
 
-		group1.AddWidget(cvv, 0, 0)
+		group1.AddWidget(cvv.QWidget)
 
-		formLayout.InsertRow6(1, group1)
+		formLayout.InsertRow6(1, group1.QLayout)
 
 		///person
 
@@ -148,38 +147,38 @@ func creditCard(app *widgets.QApplication, window *widgets.QMainWindow) {
 			x = i
 		}
 
-		name := widgets.NewQLineEdit(nil)
+		name := qt.NewQLineEdit(nil)
 
 		name.SetText(person[x].First + " " + strings.Title(strings.ToLower(person[x].Last)))
 
-		formLayout.InsertRow5(2, name)
+		formLayout.InsertRow5(2, name.QWidget)
 
-		group2 := widgets.NewQHBoxLayout()
+		group2 := qt.NewQHBoxLayout(nil)
 
-		ssnLabel := widgets.NewQLabel(nil, 0)
+		ssnLabel := qt.NewQLabel(nil)
 		ssnLabel.SetText("SSN")
-		group2.AddWidget(ssnLabel, 0, 0)
-		ssnLineEdit := widgets.NewQLineEdit(nil)
+		group2.AddWidget(ssnLabel.QWidget)
+		ssnLineEdit := qt.NewQLineEdit(nil)
 		ssnLineEdit.SetText(ssn[x])
 
-		group2.AddWidget(ssnLineEdit, 0, 0)
+		group2.AddWidget(ssnLineEdit.QWidget)
 
-		formLayout.InsertRow6(3, group2)
+		formLayout.InsertRow6(3, group2.QLayout)
 		if qty > 1 {
-			spacer := widgets.NewQLabel(nil, 0)
+			spacer := qt.NewQLabel(nil)
 			spacer.SetText("###################################################################################")
-			formLayout.InsertRow5(4, spacer)
+			formLayout.InsertRow5(4, spacer.QWidget)
 		}
 	}
 
 	// person data
 
-	vLayout.AddLayout(formLayout, 0)
-	scrollLayout := widgets.NewQVBoxLayout2(nil)
-	scrollLayout.AddWidget(scrollArea, 0, 0)
+	vLayout.AddLayout(formLayout.QLayout)
+	scrollLayout := qt.NewQVBoxLayout2()
+	scrollLayout.AddWidget(scrollArea.QWidget)
 	scrollLayout.SetContentsMargins(0, 0, 0, 0)
-	containerWidget := widgets.NewQWidget(nil, 0)
-	containerWidget.SetLayout(scrollLayout)
+	containerWidget := qt.NewQWidget(nil)
+	containerWidget.SetLayout(scrollLayout.QLayout)
 	window.SetCentralWidget(containerWidget)
 	window.Show()
 }
@@ -197,18 +196,18 @@ func matchType(t string) string {
 	return ""
 }
 
-func toolbarInit(app *widgets.QApplication, window *widgets.QMainWindow, toolbar *widgets.QToolBar) *widgets.QToolBar {
-	toolbar.SetToolButtonStyle(core.Qt__ToolButtonTextOnly)
+func toolbarInit(app *qt.QApplication, window *qt.QMainWindow, toolbar *qt.QToolBar) *qt.QToolBar {
+	toolbar.SetToolButtonStyle(qt.ToolButtonTextOnly)
 	toolbar.SetMovable(true)
 	var card cc.CardProperties
-	selector := widgets.NewQComboBox(nil)
+	selector := qt.NewQComboBox(nil)
 	items := []string{}
 	for _, v := range cc.Bin {
 
 		card = v
 		items = append(items, card.LongName)
 	}
-	// selector := widgets.NewQComboBox(nil)
+	// selector := qt.NewQComboBox(nil)
 	sort.Strings(items) //sorting items before addind to selector
 	selector.AddItems(items)
 	if ctype != "" {
@@ -217,20 +216,20 @@ func toolbarInit(app *widgets.QApplication, window *widgets.QMainWindow, toolbar
 		selector.SetCurrentIndex(0)
 	}
 
-	toolbar.AddWidget(selector)
-	qtyLabel := widgets.NewQLabel(nil, 0)
+	toolbar.AddWidget(selector.QWidget)
+	qtyLabel := qt.NewQLabel(nil)
 	qtyLabel.SetText("Qty")
-	toolbar.AddWidget(qtyLabel)
-	qtySelector := widgets.NewQComboBox(nil)
+	toolbar.AddWidget(qtyLabel.QWidget)
+	qtySelector := qt.NewQComboBox(nil)
 	qtySelector.AddItems([]string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"})
-	toolbar.AddWidget(qtySelector)
+	toolbar.AddWidget(qtySelector.QWidget)
 	if qty == 1 {
 		qtySelector.SetCurrentIndex(0)
 	} else {
 		qtySelector.SetCurrentText(strconv.Itoa(qty))
 	}
 
-	option := widgets.NewQComboBox(nil)
+	option := qt.NewQComboBox(nil)
 	options := []string{"One Person Multiple Cards", "Persons Multiple Cards"}
 	option.AddItems(options)
 	if opt != "" {
@@ -238,11 +237,11 @@ func toolbarInit(app *widgets.QApplication, window *widgets.QMainWindow, toolbar
 	} else {
 		option.SetCurrentIndex(0)
 	}
-	toolbar.AddWidget(option)
+	toolbar.AddWidget(option.QWidget)
 
-	goButton := widgets.NewQPushButton2("Generate", nil)
-	toolbar.AddWidget(goButton)
-	goButton.ConnectClicked(func(checked bool) {
+	goButton := qt.NewQPushButton3("Generate")
+	toolbar.AddWidget(goButton.QWidget)
+	goButton.OnClicked(func() {
 		ctype = selector.CurrentText()
 		opt = option.CurrentText()
 		q, err := strconv.Atoi(qtySelector.CurrentText())
